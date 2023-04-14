@@ -26,6 +26,7 @@ class Solution {
 ```
 
 ```
+// Java solution
 class Solution {
     public static int finLength(int n, int[] color, int[] radius) {
         // code here
