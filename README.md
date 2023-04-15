@@ -1,47 +1,54 @@
 # GFGPOTD (Solution code below ↓)
-## GFG Potd - 14th April
-### Remove the balls: 
-Imagine an imaginary array of length N containing balls. Given 2 arrays color and radius of length N each, where color[i] represents the color of the ith ball while radius[i] represents the radius of ith ball. If two consecutive balls have the same color and size, both are removed from the array. Geek wants to know the length of the final imaginary array.
-![image](https://user-images.githubusercontent.com/91115665/231933669-10c2311c-a2bc-49fe-a96d-e1416f0ee982.png)
+## GFG Potd - 15th April
+### Find Total Time Taken: 
+You are given an array arr of size n, containing the values in between 1 to n & time of size n, containg time in sec, you are asked to determine the total time taken in order to pick all the array elements from left to right but there is a condition, If from left, previous elments are different it takes 1 Sec to pick & if element got repeated then it will take time[arr[i]].
+
+**NOTE:**
+1. It takes 1 sec to move from index i to i+1 (1 <= i < n).
+2. 1-based indexing.
+![image](https://user-images.githubusercontent.com/91115665/232224951-5285fab8-32e3-4457-94d7-4bfdce94858b.png)
 
 ```
 // C++ solution
 class Solution {
   public:
-    int finLength(int N, vector<int> color, vector<int> radius) {
-        stack<pair<int,int>> st;
-        for(int i=0;i<N;i++)
-        {
-            pair<int,int> p={color[i],radius[i]};
-            if(!st.empty() && st.top()==p)
-            {
-                st.pop();
-                continue;
+    int totalTime(int n, vector<int> &arr, vector<int> &time) {
+        // code here
+        map<int,bool> visited;
+        int t=-1;
+        for( int i=0; i<n; i++ )
+            visited[arr[i]] = false;
+        for( int i=0; i<n; i++ ){
+            if( !visited[arr[i]] ){
+                visited[arr[i]] = true;
+                t++;
             }
-            st.push(p);
+            else
+                t+=time[arr[i]-1];
         }
-        return st.size();
+        return t;
     }
 };
 ```
 
 ```
 // Java solution
-class Solution {
-    public static int finLength(int n, int[] color, int[] radius) {
-        // code here
-        Stack<int[]> stack = new Stack<int[]>();
-        stack.push(new int[]{color[0] , radius[0]});
-        
-        for(int i = 1; i<n; i++){
-            
-            if( !stack.isEmpty() && color[i]== stack.peek()[0] && radius[i]== stack.peek()[1]){
-                stack.pop();
+class Solution
+{
+    public static long totalTime(int n,int arr[],int time[])
+    {
+        long count=0;
+        HashSet<Integer> hs=new HashSet<>();
+        hs.add(arr[0]);
+        for(int i=1;i<n;i++){
+            if(hs.contains(arr[i])){
+                count+=time[arr[i]-1];
+            }else{
+                hs.add(arr[i]);
+                count+=1;
             }
-            else stack.push(new int[]{color[i], radius[i]});
         }
-        
-        return stack.size();
+        return count;
     }
 }
 ```
@@ -49,14 +56,18 @@ class Solution {
 ```
 # Python solution
 class Solution:
-    def finLength(self, N : int, color : List[int], radius : List[int]) -> int:
+    def totalTime(self, n : int, arr : List[int], time : List[int]) -> int:
         # code here
-        stack = []
-        for i in range(N):
-            if len(stack) != 0 and [color[i], radius[i]] == stack[-1]:
-                stack.pop()
-                continue
-            stack.append([color[i], radius[i]])
+        s = set()
+        s.add(arr[0])
+        
+        total_time = 0
+        for i in range(1, n):
+            if arr[i] not in s:
+                total_time += 1
+                s.add(arr[i])
+            else:
+                total_time += time[arr[i]-1]
             
-        return len(stack)
+        return total_time
 ```
