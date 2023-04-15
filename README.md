@@ -6,6 +6,7 @@ You are given an array arr of size n, containing the values in between 1 to n & 
 **NOTE:**
 1. It takes 1 sec to move from index i to i+1 (1 <= i < n).
 2. 1-based indexing.
+
 ![image](https://user-images.githubusercontent.com/91115665/232224951-5285fab8-32e3-4457-94d7-4bfdce94858b.png)
 
 ```
