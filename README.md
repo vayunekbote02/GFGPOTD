@@ -3,15 +3,15 @@
 ### Unequal Arrays: 
 You are given two arrays A and B each of length N. You can perform the following operation on array A zero or more times. 
 
--Select any two indices i and j, 1 <= i , j <= N and i != j
--Set A[i] = A[i] + 2 and A[j] = A[j]-2
+- Select any two indices i and j, 1 <= i , j <= N and i != j
+- Set A[i] = A[i] + 2 and A[j] = A[j]-2
 
 Find the minimum number of operations required to make A and B equal.
 
-~Note :~
+*Note :*
 
--Two arrays are said to be equal if the frequency of each element is equal in both of them.
--Arrays may contain duplicate elements.
+- Two arrays are said to be equal if the frequency of each element is equal in both of them.
+- Arrays may contain duplicate elements.
 
 ![image](https://user-images.githubusercontent.com/91115665/232280025-390b9f13-831f-4ee9-8dd3-b8d6e420953f.png)
 
