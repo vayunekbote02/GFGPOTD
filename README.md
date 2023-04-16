@@ -1,74 +1,146 @@
 # GFGPOTD (Solution code below ↓)
-## GFG Potd - 15th April
-### Find Total Time Taken: 
-You are given an array arr of size n, containing the values in between 1 to n & time of size n, containg time in sec, you are asked to determine the total time taken in order to pick all the array elements from left to right but there is a condition, If from left, previous elments are different it takes 1 Sec to pick & if element got repeated then it will take time[arr[i]].
+## GFG Potd - 16th April
+### Unequal Arrays: 
+You are given two arrays A and B each of length N. You can perform the following operation on array A zero or more times. 
 
-**NOTE:**
-1. It takes 1 sec to move from index i to i+1 (1 <= i < n).
-2. 1-based indexing.
+-Select any two indices i and j, 1 <= i , j <= N and i != j
+-Set A[i] = A[i] + 2 and A[j] = A[j]-2
 
-![image](https://user-images.githubusercontent.com/91115665/232224951-5285fab8-32e3-4457-94d7-4bfdce94858b.png)
+Find the minimum number of operations required to make A and B equal.
+
+~Note :~
+
+-Two arrays are said to be equal if the frequency of each element is equal in both of them.
+-Arrays may contain duplicate elements.
+
+![image](https://user-images.githubusercontent.com/91115665/232280025-390b9f13-831f-4ee9-8dd3-b8d6e420953f.png)
 
 ```
 // C++ solution
 class Solution {
   public:
-    int totalTime(int n, vector<int> &arr, vector<int> &time) {
-        // code here
-        map<int,bool> visited;
-        int t=-1;
-        for( int i=0; i<n; i++ )
-            visited[arr[i]] = false;
-        for( int i=0; i<n; i++ ){
-            if( !visited[arr[i]] ){
-                visited[arr[i]] = true;
-                t++;
-            }
+    long long solve(int N, vector<int> &A, vector<int> &B) {
+        
+        vector<int> a[2], b[2];
+        
+        long long s1=0, s2=0;
+        
+        for(int i=0; i<N; i++){
+            s1+=A[i];
+            s2+=B[i];
+            
+            if(abs(A[i])%2==0)
+                a[0].push_back(A[i]);
             else
-                t+=time[arr[i]-1];
+                a[1].push_back(A[i]);
+            
+            if(abs(B[i])%2==0)
+                b[0].push_back(B[i]);
+            else
+                b[1].push_back(B[i]);
         }
-        return t;
+        
+        if(s1!=s2 or (a[0].size()!=b[0].size()))
+        {
+            return -1;
+        }
+        
+        long long ans = 0;
+    
+        for(int i = 0; i < 2; i++) 
+        {
+            sort(a[i].begin(), a[i].end());
+            sort(b[i].begin(), b[i].end());
+            
+            for(int j = 0; j < a[i].size(); j++) 
+            {
+                ans += abs(a[i][j] - b[i][j]) / 2;
+            }
+        }
+        return ans / 2;
     }
 };
 ```
 
 ```
 // Java solution
-class Solution
-{
-    public static long totalTime(int n,int arr[],int time[])
-    {
-        long count=0;
-        HashSet<Integer> hs=new HashSet<>();
-        hs.add(arr[0]);
-        for(int i=1;i<n;i++){
-            if(hs.contains(arr[i])){
-                count+=time[arr[i]-1];
-            }else{
-                hs.add(arr[i]);
-                count+=1;
+
+
+                                                        class Solution {
+    public static long solve(int N, int[] A, int[] B) {
+        Arrays.sort(A); // closer element should remain closer 
+        Arrays.sort(B); // Minimum opern
+        List<Integer> Aodds = new ArrayList<Integer>();
+        List<Integer> Aevens = new ArrayList<Integer>();
+        List<Integer> Bodds = new ArrayList<Integer>();
+        List<Integer> Bevens = new ArrayList<Integer>();
+        long sum1 = 0, sum2 = 0;
+        for (int i = 0; i < N; i++) {
+            sum1 += A[i];
+            sum2 += B[i];
+            if (A[i] % 2 != 0) {
+                Aodds.add(A[i]);
+            } else {
+                Aevens.add(A[i]);
+            }
+            if (B[i] % 2 != 0) {
+                Bodds.add(B[i]);
+            } else {
+                Bevens.add(B[i]);
             }
         }
-        return count;
+        // confirmation that A->B
+        if (sum1 != sum2 || Aodds.size() != Bodds.size()) {
+            return -1;
+        }
+
+        long ans = 0;
+        for (int i = 0; i < Aodds.size(); i++) {
+            ans += Math.abs(Aodds.get(i) - Bodds.get(i));
+        }
+        for (int i = 0; i < Aevens.size(); i++) {
+            ans += Math.abs(Aevens.get(i) - Bevens.get(i));
+        }
+        return ans / 4;
     }
 }
 ```
 
 ```
 # Python solution
+from typing import List
 class Solution:
-    def totalTime(self, n : int, arr : List[int], time : List[int]) -> int:
+    def solve(self, N : int, A : List[int], B : List[int]) -> int:
         # code here
-        s = set()
-        s.add(arr[0])
-        
-        total_time = 0
-        for i in range(1, n):
-            if arr[i] not in s:
-                total_time += 1
-                s.add(arr[i])
-            else:
-                total_time += time[arr[i]-1]
+        if sum(A) != sum(B):
+            return -1
             
-        return total_time
+        A.sort()
+        B.sort()
+        
+        ae, ao, be, bo = [], [], [], []
+        for i in A:
+            if i % 2 == 0:
+                ae.append(i)
+            else:
+                ao.append(i)
+                
+        for i in B:
+            if i % 2 == 0:
+                be.append(i)
+            else:
+                bo.append(i)
+        
+        if len(bo) != len(ao) or len(be) != len(ae):
+            return -1
+            
+        count = 0
+        for i in range(len(ae)):
+            if be[i] > ae[i]:
+                count += (be[i] - ae[i]) // 2
+        for i in range(len(ao)):
+            if bo[i] > ao[i]:
+                count += (bo[i] - ao[i]) // 2
+                
+        return count
 ```
