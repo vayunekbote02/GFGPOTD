@@ -64,9 +64,7 @@ class Solution {
 
 ```
 // Java solution
-
-
-                                                        class Solution {
+class Solution {
     public static long solve(int N, int[] A, int[] B) {
         Arrays.sort(A); // closer element should remain closer 
         Arrays.sort(B); // Minimum opern
