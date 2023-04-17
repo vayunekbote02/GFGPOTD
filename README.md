@@ -1,4 +1,4 @@
-# GFGPOTD (Solution code below ↓)
+# GFGPOTD 17th April (Solution code below ↓)
 ![image](https://user-images.githubusercontent.com/91115665/232490925-c06a00c3-632e-46d9-b77c-0af434efcacf.png)
 
 ## GFG Potd - 17th April
