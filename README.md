@@ -1,4 +1,4 @@
-# GFGPOTD 17th April (Solution code below ↓)
+# GFGPOTD 17th April (C++, Java, Python solution code below ↓)
 ![image](https://user-images.githubusercontent.com/91115665/232490925-c06a00c3-632e-46d9-b77c-0af434efcacf.png)
 
 ## GFG Potd - 17th April
@@ -12,16 +12,13 @@ Given a set of **N** jobs where each **job<sub>i</sub>** has a deadline and prof
 **Your Task** :
 You don't need to read input or print anything. Your task is to complete the function **JobScheduling()** which takes an integer **N** and an array of Jobs(Job id, Deadline, Profit) as input and returns an array **ans[ ]** in which **ans[0] contains the count of jobs and ans[1] contains maximum profit**.
 
-**Expected Time Complexity**: O(NlogN)
-
+**Expected Time Complexity**: O(NlogN) <br/>
 **Expected Auxilliary Space**: O(N)
 
 **Constraints**:
-1 <= N <= 105
-
-1 <= Deadline <= 100
-
-1 <= Profit <= 500
+1 <= N <= 105 <br/>
+1 <= Deadline <= 100 <br/>
+1 <= Profit <= 500 <br/>
 
 ```
 // C++ solution
