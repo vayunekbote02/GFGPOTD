@@ -15,7 +15,7 @@ You don't need to read input or print anything. Your task is to complete the fun
 **Expected Time Complexity**: O(NlogN) <br/>
 **Expected Auxilliary Space**: O(N)
 
-**Constraints**:
+**Constraints**: <br/>
 1 <= N <= 105 <br/>
 1 <= Deadline <= 100 <br/>
 1 <= Profit <= 500 <br/>
