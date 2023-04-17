@@ -13,11 +13,14 @@ Given a set of **N** jobs where each **job<sub>i</sub>** has a deadline and prof
 You don't need to read input or print anything. Your task is to complete the function **JobScheduling()** which takes an integer **N** and an array of Jobs(Job id, Deadline, Profit) as input and returns an array **ans[ ]** in which **ans[0] contains the count of jobs and ans[1] contains maximum profit**.
 
 **Expected Time Complexity**: O(NlogN)
+
 **Expected Auxilliary Space**: O(N)
 
 **Constraints**:
 1 <= N <= 105
+
 1 <= Deadline <= 100
+
 1 <= Profit <= 500
 
 ```
