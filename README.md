@@ -1,16 +1,9 @@
-# GFGPOTD 17th April (C++, Java, Python solution code below ↓)
+# GFGPOTD 19th April (C++, Java, Python solution code below ↓)
 ![image](https://user-images.githubusercontent.com/91115665/232490925-c06a00c3-632e-46d9-b77c-0af434efcacf.png)
 
-## GFG Potd - 17th April
-### Job Sequencing Problem: 
-Given a set of **N** jobs where each **job<sub>i</sub>** has a deadline and profit associated with it. Each job takes ***1*** unit of time to complete and only one job can be scheduled at a time. We earn the profit if and only if the job is completed by its deadline. The task is to find the number of jobs done and the **maximum profit**.
-
-**Note**: Jobs will be given in the form (Jobid, Deadline, Profit) associated with that Job.
-
-![image](https://user-images.githubusercontent.com/91115665/232490112-04ebe08c-9c81-4f89-8413-51454e0982d9.png)
-
-**Your Task** :
-You don't need to read input or print anything. Your task is to complete the function **JobScheduling()** which takes an integer **N** and an array of Jobs(Job id, Deadline, Profit) as input and returns an array **ans[ ]** in which **ans[0] contains the count of jobs and ans[1] contains maximum profit**.
+## GFG Potd - 19th April
+### Wifi Range: 
+There are N rooms in a straight line in Geekland State University's hostel, you are given a binary string S of length N where S[i] = '1' represents that there is a wifi in ith room or S[i] = '0' represents no wifi. Each wifi has range X i.e. if there is a wifi in ith room then its range will go upto X more rooms on its left as well as right. You have to find whether students in all rooms can use wifi.
 
 **Expected Time Complexity**: O(NlogN) <br/>
 **Expected Auxilliary Space**: O(N)
@@ -22,92 +15,65 @@ You don't need to read input or print anything. Your task is to complete the fun
 
 ```
 // C++ solution
-class Solution 
-{
+class Solution{
     public:
-    //Function to find the maximum profit and the number of jobs done.
-    vector<int> JobScheduling(Job arr[], int n) 
-    { 
-        // your code here
-         vector<pair<int, int>> v;
-        vector<int> res(2,0);
-        vector<bool> vis(n,false);
-        for(int i=0;i<n;i++){
-            v.push_back(make_pair(arr[i].profit,arr[i].dead));
-        }
-        sort(v.begin(),v.end(),greater<pair<int,int>>() );
-        for(auto t: v){
-            int profit=t.first,deadline=t.second-1;
-            deadline=min(deadline,n);
-            if(vis[deadline]) {
-                for(int i=deadline;i>=0;i--){
-                    if(vis[i]==false) {
-                        res[0]++,res[1]+=profit;
-                        vis[i]=true;
-                        break;
-                    }
-                }
-            }
-            else{
-                res[0]++,res[1]+=profit;
-                vis[deadline]=true;
+    bool wifiRange(int N, string S, int X){
+        int l = -1;
+        for(int i = 0; i < N; i++)
+        {
+            if(S[i] == '1')
+            {
+                if(i-X-1 > l) return false;
+                l = i+X;
             }
         }
-        return res;
-    } 
+        if(l < N-1) return false;
+        return true;
+    }
 };
 ```
 
 ```
 // Java solution
-class Solution
-{
-    //Function to find the maximum profit and the number of jobs done.
-    int[] JobScheduling(Job arr[], int n)
-    {
-        // Your code here
-        int c=0,totalprofit=0;
-        Arrays.sort(arr,(x,y)->x.deadline-y.deadline);
-        PriorityQueue<Integer> pq=new PriorityQueue<>();
-        for(int i=0;i<n;i++){
-            if(arr[i].deadline>pq.size())pq.add(arr[i].profit);
-            else if(arr[i].deadline==pq.size()){
-                if(arr[i].profit>pq.peek()){
-                    pq.poll();
-                    pq.add(arr[i].profit);
-                }
-            }
+class Solution 
+{ 
+    boolean wifiRange(int N, String S, int X) 
+    { 
+        // code here
+        int c = 0;
+        int i = 0;
+        while(i<N){
+            if(S.charAt(i)=='0')
+                c++;
+            else
+                c = (-1)*(X);
+            i++;
+            if(c>X)
+                return false;
         }
-        int ans[]=new int[2];
-        c=pq.size();
-        while(!pq.isEmpty())totalprofit+=pq.poll();
-        ans[0]=c;
-        ans[1]=totalprofit;
-        return ans;
+        if(c>0)
+            return false;
+        return true;
+
     }
-}
+} 
 ```
 
 ```
 # Python solution
 class Solution:
-    
-    #Function to find the maximum profit and the number of jobs done.
-    def JobScheduling(self,arr,n):
-        Jobs.sort(key=lambda x:x.profit, reverse=True)
-        extra = [0] * max(i.deadline for i in Jobs)
-        total_profit, count = 0, 0
-        
-        for i in Jobs:
-            j = i.deadline - 1
-            while j >= 0:
-                if extra[j] == 0:
-                    total_profit += i.profit
-                    count += 1
-                    extra[j] = 1
-                    break
-                else:
-                    j -= 1
-                    
-        return [count, total_profit]
+    def wifiRange(self, N, S, X): 
+        #code here
+        count = 0
+        for i in S:
+            if i == '1':
+                count = X
+            else:
+                if count < -X + 1:
+                    return False
+                count -= 1
+                
+        if count < 0:
+            return False
+        return True
 ```
