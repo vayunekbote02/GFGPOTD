@@ -70,9 +70,9 @@ class Solution:
             if i == '1':
                 count = X
             else:
-                if count < -X + 1:
-                    return False
                 count -= 1
+                if count < -X:
+                    return False
                 
         if count < 0:
             return False
