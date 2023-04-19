@@ -3,15 +3,16 @@
 
 ## GFG Potd - 19th April
 ### Wifi Range: 
-There are N rooms in a straight line in Geekland State University's hostel, you are given a binary string S of length N where S[i] = '1' represents that there is a wifi in ith room or S[i] = '0' represents no wifi. Each wifi has range X i.e. if there is a wifi in ith room then its range will go upto X more rooms on its left as well as right. You have to find whether students in all rooms can use wifi.
+There are **N** rooms in a straight line in Geekland State University's hostel, you are given a binary string **S** of length **N** where **S[i] = '1'** represents that there is a wifi in i<sup>th</sup> room or **S[i] = '0'** represents no wifi. Each wifi has range **X** i.e. if there is a wifi in ith room then its range will go upto **X** more rooms on its left as well as right. You have to find whether students in all rooms can use wifi.
 
-**Expected Time Complexity**: O(NlogN) <br/>
-**Expected Auxilliary Space**: O(N)
+![image](https://user-images.githubusercontent.com/91115665/232979397-212c402f-d41f-4010-b392-861474ad0e9a.png)
+
+**Expected Time Complexity**: O(N) <br/>
+**Expected Auxilliary Space**: O(1)
 
 **Constraints**: <br/>
-1 <= N <= 105 <br/>
-1 <= Deadline <= 100 <br/>
-1 <= Profit <= 500 <br/>
+1 ≤ N ≤ 10<sup>6</sup> <br/>
+0 ≤ X ≤ 10<sup>6</sup> <br/>
 
 ```
 // C++ solution
